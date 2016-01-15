@@ -1,0 +1,62 @@
+{
+	"name": "vimeo",
+	"url": "https://developer.vimeo.com/api/start",
+	"type": "rest",
+	
+	"body": {
+		"appId": "a4c153461d40385f787f042743d51a594fdfa719",
+		"appSecret": "9enyOamlaXXoUqAWNF3IzGMtuvR+3gIeyMk3IR44gFggI1ZMtyx/LvHaV+I/HCotpS27+sbjVnPMo03pg4XDNnZulmXBANTCNjVISPPOr2KPCpEqnObvESRbjF05NhUn",
+		"restUri": "https://api.vimeo.com/",
+		"redirectUri": "https://localhost/callback/vimeo",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth2",
+		
+		"functions": [
+			{
+				"name": "authorize",
+				"path": "oauth/authorize",
+				"method": "GET",
+				"args": {
+					"response_type": "code",
+					"client_id": "{appId}",
+					"redirect_uri": "{redirectUri}",
+					"scope": "public",
+					"state": "{state}"
+				},
+				"authentication": "",
+				"response": "https://api.vimeo.com/oauth/authorize?{args}"
+			},
+		
+			{
+				"name": "token",
+				"path": "oauth/access_token",
+				"method": "POST",
+				"authentication": "Basic",
+				"args": {
+					"grant_type": "authorization_code",
+					"code": "{code}",
+					"redirect_uri": "{redirectUri}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "me",
+				"path": "me",
+				"method": "GET",
+				"response": "json"
+			},
+			
+			{
+				"name": "get likes",
+				"path": "me/likes",
+				"method": "GET",
+				"response": "json",
+				"args": {
+					"sort": "date",
+					"direction": "desc"
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,101 @@
+{
+	"name": "tumblr",
+	"url": "https://www.tumblr.com/docs/en/api/v2",
+	"type": "rest",
+	
+	"body": {	
+		"appId": "VTnA9hAIsnGJ2OairDVv10KudZYwqLjhvsuihMa9seL5Gjsf4s",
+		"appSecret": "Jokez2lH6hfnrXj6l7LgKeba28A5LDsvtelkswRPZ2nIxdy5A4",
+		"restUri": "https://api.tumblr.com/",
+		"redirectUri": "https://localhost/callback/tumblr",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth1",
+	
+		"functions": [
+			{
+				"name": "request_token",
+				"restUri": "https://www.tumblr.com/",
+				"path": "oauth/request_token",
+				"method": "POST",
+				"args": null,
+				"response": "form-data"
+			},
+			
+			{
+				"name": "authorize",
+				"path": "oauth/authorize",
+				"restUri": "https://www.tumblr.com/",
+				"method": "GET",
+				"args": {
+					"oauth_token": "{oauth_token}",
+					"oauth_token_secret": "{oauth_token_secret}"
+				},
+				"require": "request_token",
+				"response": "https://www.tumblr.com/oauth/authorize?oauth_token={oauth_token}"
+			},
+			
+			{
+				"name": "token",
+				"path": "oauth/access_token",
+				"restUri": "https://www.tumblr.com/",
+				"method": "POST",
+				"args": {
+					"oauth_token": "{token}",
+					"oauth_token_secret": "{secret}",
+					"oauth_verifier": "{verifier}"
+				},
+				"response": "form-data"
+			},
+			
+			{
+				"name": "info",
+				"path": "v2/user/info",
+				"method": "GET",
+				"response": "json",
+				"args": null
+			},
+			
+			{
+				"name": "create a photo post",
+				"path": "v2/blog/{hostname}/post",
+				"method": "POST",
+				"response": "json",
+				"args": {
+					"type": "photo",
+					"source": "{image}"
+				}
+			},
+			{
+				"name": "create an audio post from url",
+				"path": "v2/blog/{hostname}/post",
+				"method": "POST",
+				"response": "json",
+				"args": {
+					"type": "audio",
+					"external_url": "{audio}"
+				}
+			},
+			
+			{
+				"name": "dashboard",
+				"path": "v2/user/dashboard",
+				"method": "GET",
+				"args": {
+					"since_id": "{sinceId}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "get posts",
+				"path": "v2/blog/{blogname}/posts",
+				"method": "GET",
+				"response": "json",
+				"args": {
+					"offset": "{offset}",
+					"limit": "20"
+				}
+			}
+		]
+	}
+}

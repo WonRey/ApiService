@@ -1,0 +1,86 @@
+{
+	"name": "youtube",
+	"url": "https://developers.google.com/youtube/v3/docs/",
+	"type": "rest",
+	
+	"body": {
+		"appId": "196648355724-ont9j2hfenk3ibucrsidjg0ono5d55gm.apps.googleusercontent.com",
+		"appSecret": "EAj9p2zSk8_9PM0RXgrtOb0r",
+		"restUri": "https://www.googleapis.com/",
+		"redirectUri": "https://localhost/callback/youtube",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth2",
+		
+		"functions": [
+			{
+				"name": "authorize",
+				"path": "oauth/authorize",
+				"method": "GET",
+				"args": {
+					"response_type": "code",
+					"client_id": "{appId}",
+					"redirect_uri": "{redirectUri}",
+					"scope": "profile https://www.googleapis.com/auth/youtube.readonly",
+					"state": "{state}",
+					"access_type": "offline",
+					"approval_prompt": "force",
+					"include_granted_scopes": "true"
+				},
+				"authentication": "",
+				"response": "https://accounts.google.com/o/oauth2/auth?{args}"
+			},
+		
+			{
+				"name": "token",
+				"path": "oauth2/v3/token",
+				"method": "POST",
+				"args": {
+					"client_id": "{appId}",
+					"client_secret": "{appSecret}",
+					"grant_type": "authorization_code",
+					"code": "{code}",
+					"redirect_uri": "{redirectUri}"
+				},
+				"authentication": "",
+				"response": "json"
+			},
+			
+			{
+				"name": "refresh token",
+				"path": "oauth2/v3/token",
+				"method": "POST",
+				"args": {
+					"client_id": "{appId}",
+					"client_secret": "{appSecret}",
+					"refresh_token": "{refreshToken}",
+					"grant_type": "refresh_token"
+				},
+				"authentication": "",
+				"response": "json"
+			},
+			
+			{
+				"name": "get channels",
+				"path": "youtube/v3/channels",
+				"method": "GET",
+				"args": {
+					"part": "contentDetails",
+					"mine": true
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "playlistitems",
+				"path": "youtube/v3/playlistItems",
+				"method": "GET",
+				"args": {
+					"part": "id",
+					"playlistId": "{playlist}",
+					"fields": "items(id)"
+				},
+				"response": "json"
+			}
+		]
+	}
+}

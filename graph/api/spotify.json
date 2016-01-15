@@ -1,0 +1,93 @@
+{
+	"name": "spotify",
+	"url": "https://developer.spotify.com/web-api/",
+	"type": "rest",
+	
+	"body": {
+		"appId": "5bc9768443604ffb8f867ccec4cd5add",
+		"appSecret": "0fab401c8b25455186a0cf8fbba098a1",
+		"restUri": "https://api.spotify.com/v1/",
+		"redirectUri": "https://localhost/callback/spotify",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth2",
+		
+		"functions": [
+			{
+				"name": "authorize",
+				"path": "oauth2/authorize",
+				"method": "GET",
+				"args": {
+					"client_id": "{appId}",
+					"response_type": "code",
+					"state": "{state}",
+					"redirect_uri": "{redirectUri}",
+					"scope": "user-library-modify playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative"
+				},
+				"authentication": "",
+				"response": "https://accounts.spotify.com/authorize?{args}"
+			},
+		
+			{
+				"name": "token",
+				"restUri": "https://accounts.spotify.com/",
+				"path": "api/token",
+				"method": "POST",
+				"authentication": "Basic",
+				"args": {
+					"grant_type": "authorization_code",
+					"code": "{code}",
+					"redirect_uri": "{redirectUri}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "refresh token",
+				"restUri": "https://accounts.spotify.com/",
+				"path": "api/token",
+				"method": "POST",
+				"authentication": "Basic",
+				"args": {
+					"grant_type": "refresh_token",
+					"refresh_token": "{refreshToken}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "me",
+				"path": "me",
+				"method": "GET",
+				"response": "json"
+			},
+			
+			{
+				"name": "add track",
+				"path": "me/tracks?ids={ids}",
+				"method": "PUT",
+				"response": "json"
+			},
+			
+			{
+				"name": "get playlists",
+				"path": "users/{id}/playlists",
+				"method": "GET",
+				"response": "json",
+				"args": {
+					"limit": "50",
+					"offset": "0"
+				}
+			},
+			
+			{
+				"name": "get playlist's tracks",
+				"path": "users/{id}/playlists/{playlistId}/tracks",
+				"method": "GET",
+				"response": "json",
+				"args": {
+					"fields": "items(added_at,track(id,type))"
+				}
+			}
+		]
+	}
+}

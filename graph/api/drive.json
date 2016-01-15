@@ -1,0 +1,130 @@
+{
+	"name": "drive",
+	"url": "https://developers.google.com/drive/v2/reference/",
+	"type": "rest",
+	
+	"body": {
+		"appId": "196648355724-ont9j2hfenk3ibucrsidjg0ono5d55gm.apps.googleusercontent.com",
+		"appSecret": "EAj9p2zSk8_9PM0RXgrtOb0r",
+		"restUri": "https://www.googleapis.com/",
+		"redirectUri": "https://localhost/callback/drive",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth2",
+		
+		"functions": [
+			{
+				"name": "authorize",
+				"path": "oauth/authorize",
+				"method": "GET",
+				"args": {
+					"response_type": "code",
+					"client_id": "{appId}",
+					"redirect_uri": "{redirectUri}",
+					"scope": "profile https://www.googleapis.com/auth/drive",
+					"state": "{state}",
+					"access_type": "offline",
+					"approval_prompt": "force",
+					"include_granted_scopes": "true"
+				},
+				"authentication": "",
+				"response": "https://accounts.google.com/o/oauth2/auth?{args}"
+			},
+		
+			{
+				"name": "token",
+				"path": "oauth2/v3/token",
+				"method": "POST",
+				"args": {
+					"client_id": "{appId}",
+					"client_secret": "{appSecret}",
+					"grant_type": "authorization_code",
+					"code": "{code}",
+					"redirect_uri": "{redirectUri}"
+				},
+				"authentication": "",
+				"response": "json"
+			},
+			
+			{
+				"name": "refresh token",
+				"path": "oauth2/v3/token",
+				"method": "POST",
+				"args": {
+					"client_id": "{appId}",
+					"client_secret": "{appSecret}",
+					"refresh_token": "{refreshToken}",
+					"grant_type": "refresh_token"
+				},
+				"authentication": "",
+				"response": "json"
+			},
+			
+			{
+				"name": "create a document",
+				"path": "upload/drive/v2/files?uploadType=media&convert=true",
+				"method": "POST",
+				"response": "json",
+				"content-type": "application/octet-stream",
+				"args": {
+					"file": "file://{file}"
+				}
+			},
+			
+			{
+				"name": "upload file from url",
+				"path": "upload/drive/v2/files?uploadType=media&convert=true",
+				"method": "POST",
+				"response": "json",
+				"content-type": "application/octet-stream",
+				"args": {
+					"file": "url://{url}"
+				}
+			},
+			
+			{
+				"name": "get file",
+				"path": "drive/v2/files/{fileId}",
+				"method": "GET",
+				"response": "json",
+				"content-type": "application/json"
+			},
+			
+			{
+				"name": "download file",
+				"restUri": "",
+				"path": "{url}",
+				"method": "GET",
+				"response": "binary"
+			},
+			
+			{
+				"name": "update file",
+				"path": "upload/drive/v2/files/{fileId}?uploadType=media",
+				"method": "PUT",
+				"response": "json",
+				"content-type": "application/octet-stream",
+				"args": {
+					"file": "file://{file}"
+				}
+			},
+			
+			{
+				"name": "update metadata",
+				"path": "drive/v2/files/{fileId}",
+				"method": "PUT",
+				"response": "json",
+				"content-type": "application/json",
+				"args": {
+					"title": "{title}"
+				}
+			},
+			
+			{
+				"name": "info",
+				"path": "oauth2/v3/userinfo",
+				"method": "POST",
+				"response": "json"
+			}			
+		]
+	}
+}

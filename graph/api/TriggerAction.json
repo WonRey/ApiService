@@ -1,0 +1,239 @@
+{
+	"lengthTrigger" : 12 ,
+	"lengthAction" : 9 ,
+	
+	"trigger":[
+		{"Service":[
+			{"length": 10 },
+			{"name":"facebook"},
+			{"trig":"Any new post in your area" },
+			{"trig": "New status message by you" },
+			{"trig": "New status message by you with hashtag" },
+			{"trig": "New link post by you" },
+			{"trig": "New link post by you with hashtag" },
+			{"trig": "New photo post by you" },
+			{"trig": "New photo post by you with hashtag" },
+			{"trig": "New photo post by you in area" },
+			{"trig": "You are tagged in a photo" },
+			{"trig": "Your profile changes" }
+			]
+		},
+		
+
+		{"Service":[
+			{"length": 10 },
+			{"name": "twitter"},
+			{"trig": "New tweet by you" },
+			{"trig": "New tweet by you with hashtag" },
+			{"trig": "New tweet by you in area" },
+			{"trig": "New mention of you" },
+			{"trig": "New link by you" },
+			{"trig": "New follower" },
+			{"trig": "New favorite tweet by you" },
+			{"trig": "New tweet by a specific user" },
+			{"trig": "New tweet from search" },
+			{"trig": "New tweet by anyone in area " }
+			]
+		},
+		
+		{"Service":[
+			{"length": 9 },
+			{"name":"instagram"},
+			{"trig": "Any new photo by you" },
+			{"trig": "New photo by you with specif hashtag" },
+			{"trig": "New photo by you in area" },
+			{"trig": "You like a photo" },
+			{"trig": "New photo by specif user" },
+			{"trig": "New photo by anyone in area " },
+			{"trig": "New photo by anyone with specif hashtag" },
+			{"trig": "Any new video by you" },
+			{"trig": "New video by you with specif hashtag" }
+			]
+		},
+		
+		{"Service":[
+			{"length": 3 },
+			{"name":"youtube"},
+			{"trig": "New liked video " },
+			{"trig": "New watch later video" },
+			{"trig": "New public video uploaded by you" }
+	
+			]
+		},
+		
+		{"Service":[
+			{"length": 6 },
+			{"name":"vimeo"},
+			{"trig": "New like video " },
+			{"trig": "New watchlater video" },
+			{"trig": "New video uploadeda" },
+			{"trig": "New video in yourfeed" },
+			{"trig": "New staff pick" },
+			{"trig": "New video from search " }
+			]
+		},
+		
+		{"Service":[
+			{"length": 6 },
+			{"name":"gmail"},
+			{"trig": "Any new email in inbox " },
+			{"trig": "Any new attachment in inbox " },
+			{"trig": "New email in inbox from" },
+			{"trig": "New starred email in inbox " },
+			{"trig": "New email in inbox labeled " },
+			{"trig": "New email in inbox from search" }
+			]
+		},
+		
+		{"Service":[
+			{"length": 2 },
+			{"name":"dropbox"},
+			{"trig": "New file in your folder" },
+			{"trig": "New file in your folder" }
+			]
+		},		
+		{"Service":[
+			{"length": 2 },
+			{"name":"spotify"},
+			{"trig": "New savedtrack" },
+			{"trig": "New track added to a playlist" }
+			]
+		},
+		
+		{"Service":[
+			{"length": 10 },
+			{"name":"tumblr"},
+			{"trig": "Any new post" },
+			{"trig": "New post tagged" },
+			{"trig": "New text post" },
+			{"trig": "New photo post" },
+			{"trig": "New link post" },
+			{"trig": "New quote post" },
+			{"trig": "New audio post" },
+			{"trig": "Every N post" },
+			{"trig": "New post on a blog you follow" },
+			{"trig": "New like" }
+			]
+		},
+		
+		{"Service":[
+			{"length": 4 },
+			{"name":"flickr"},
+			{"trig": "Any new public photo" },
+			{"trig": "New public photo tagged" },
+			{"trig": "New public photos" },
+			{"trig": "Any new set" }
+			]
+		},
+		{"Service":[
+			{"length": 3 },
+			{"name":"calendar"},
+			{"trig": "Anyeventstarts" },
+			{"trig": "Event from searchstarts" },
+			{"trig": "New public photos" }
+			]
+		},
+		{"Service":[
+			{"length": 14 },
+			{"name":"yahooweather"},
+			{"trig": "Today’sweather report" },
+			{"trig": "Tomorrow’sweather report" },
+			{"trig": "Current temperature dropsbelow" },
+			{"trig": "Current temperature risesabove" },
+			{"trig": "Currentconditionchanges to" },
+			{"trig": "Tomorrow’slowdropsbelow" },
+			{"trig": "Tomorrow’s high risesabove" },
+			{"trig": "Tomorrow’sforecastcalls for" },
+			{"trig": "Sunrise" },
+			{"trig": "Sunset" },
+			{"trig": "Wind speedrisesabove" },
+			{"trig": "Currentpollencountrisesabove" },
+			{"trig": "Currenthumiditylevelrisesabove" },
+			{"trig": "Current UV index rises above" }
+			]
+		}
+			
+		],
+		
+	"action":[
+		{"Service":[
+			{"length": 3 },
+			{"name":"facebook"},
+			{"act": "Create a status message " },
+			{"act": "Create a link post " },
+			{"act": "Upload a photo from URL " }
+			]
+		
+		},
+		{"Service":[
+			{"length": 6 },
+			{"name":"twitter"},
+			{"act": "Post a tweet  " },
+			{"act": "Post a tweet with image " },
+			{"act": "Send a direct message to yourself " },
+			{"act": "Update profilepicture " },
+			{"act": "Update bio" },
+			{"act": "Adduser to list" }
+			]
+		},
+		{"Service":[
+			{"length": 1 },
+			{"name":"gmail"},
+			{"act": "Send an email " }
+			]
+		},
+		{"Service":[
+			{"length": 3 },
+			{"name":"dropbox"},
+			{"act": "Add file from URL " },
+			{"act": "Create a text file " },
+			{"act": "Append to a text file " }
+			]
+		},
+		{"Service":[
+			{"length": 4 },
+			{"name":"drive"},
+			{"act": "Upload file from URL  " },
+			{"act": "Create a document " },
+			{"act": "Append to a document " },
+			{"act": "Addrow to spreadsheet " }
+			]
+		},
+		{"Service":[
+			{"length": 2 },
+			{"name":"spotify"},
+			{"act": "Save a track" },
+			{"act": "Addtrack to a playlist" }
+			]
+		},
+		{"Service":[
+			{"length": 6 },
+			{"name":"tumblr"},
+			{"act": "Create a text post" },
+			{"act": "Create a photo post" },
+			{"act": "Create a link post" },
+			{"act": "Create a quote post" },
+			{"act": "Create a video post" },
+			{"act": "Create an audio post from URL" }
+			]
+		},
+		{"Service":[
+			{"length": 1 },
+			{"name":"calendar"},
+			{"act": "Quickaddevent" }
+			]
+		},
+		{"Service":[
+			{"length": 1 },
+			{"name":"flickr"},
+			{"act": "Upload public photo from URL" }
+			]
+			
+		
+		}
+	]
+	
+	
+	
+
+}

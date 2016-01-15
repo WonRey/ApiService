@@ -1,0 +1,48 @@
+{
+	"name": "flickr",
+	"url": "https://www.flickr.com/services/api/",
+	"type": "rest",
+	
+	"body": {
+		"appId": "f0e1f411e8f403d358cc0c2b11adab99",
+		"appSecret": "d6426ad3916ff587",
+		"restUri": "https://api.flickr.com/services/",
+		"redirectUri": "https://localhost/callback/flickr",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth1",
+			
+		"functions": [
+			{
+				"name": "request_token",
+				"path": "oauth/request_token",
+				"method": "POST",
+				"response": "form-data"
+			},
+			
+			{
+				"name": "authorize",
+				"path": "oauth/authorize",
+				"method": "GET",
+				"args": {
+					"oauth_token": "{oauth_token}",
+					"oauth_token_secret": "{oauth_token_secret}"
+				},
+				"require": "request_token",
+				"response": "https://www.flickr.com/services/oauth/authorize?oauth_token={oauth_token}"
+			},
+		
+			{
+				"name": "token", 
+				"path": "oauth/access_token",
+				"method": "POST",
+				"args": {
+					"oauth_token": "{token}",
+					"oauth_token_secret": "{secret}",
+					"oauth_verifier": "{verifier}"
+				},
+				"response": "form-data"
+			}
+					   
+		]
+	}
+}

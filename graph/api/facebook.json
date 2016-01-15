@@ -1,0 +1,61 @@
+{
+	"name": "facebook",
+	"url": "https://developers.facebook.com/docs/graph-api/reference/",
+	"type": "rest",
+	
+	"body": {
+		"appId": "1620528018234889",
+		"appSecret": "c2e70089ee3b7e309aee10e53258d2ff",
+		"restUri": "https://graph.facebook.com/v2.4/",
+		"redirectUri": "https://localhost/callback/facebook",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth2",
+		
+		"functions": [
+			{
+				"name": "authorize",
+				"path": "oauth/authorize",
+				"method": "GET",
+				"args": {
+					"client_id": "{appId}",
+					"response_type": "code",
+					"redirect_uri": "{redirectUri}",
+					"state": "{state}",
+					"scope": "public_profile,user_status"
+				},
+				"authentication": "",
+				"response": "https://www.facebook.com/dialog/oauth?{args}"
+			},
+		
+			{
+				"name": "token",
+				"path": "oauth/access_token?redirect_uri={redirectUri}",
+				"method": "GET",
+				"authentication": "",
+				"args": {
+					"client_id": "{appId}",
+					"client_secret": "{appSecret}",
+					"code": "{code}"					
+				},
+				"response": "json"
+			},		
+			
+			{
+				"name": "me",
+				"path": "me",
+				"method": "GET",
+				"response": "json"
+			},
+			
+			{
+				"name": "Create a status message",
+				"path": "me/feed",
+				"method": "POST",
+				"args": {
+					"message": "{message}"
+				},
+				"response": "json" 
+			} 			
+		]
+	}
+}

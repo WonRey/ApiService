@@ -1,0 +1,154 @@
+{
+	"name": "twitter",
+	"url": "https://dev.twitter.com/rest/public",
+	"type": "rest",
+	
+	"body": {
+		"appId": "iOAwAY95wnVvv125eNF7uOGto",
+		"appSecret": "JMi6rGMcfSkmMEfcWpiTFEJsXNVAxghceT8doXg91FNPkzTgnu",
+		"restUri": "https://api.twitter.com/",
+		"redirectUri": "https://localhost/callback/twitter",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth1",
+	
+		"functions": [
+			{
+				"name": "request_token",
+				"path": "oauth/request_token",
+				"method": "POST",
+				"response": "form-data"
+			},
+			
+			{
+				"name": "authorize",
+				"path": "oauth/authorize",
+				"method": "GET",
+				"args": {
+					"oauth_token": "{oauth_token}",
+					"oauth_token_secret": "{oauth_token_secret}"
+				},
+				"require": "request_token",
+				"response": "https://api.twitter.com/oauth/authenticate?oauth_token={oauth_token}"
+			},
+			
+			{
+				"name": "token",
+				"path": "oauth/access_token",
+				"method": "POST",
+				"args": {
+					"oauth_token": "{token}",
+					"oauth_verifier": "{verifier}"
+				},
+				"response": "form-data"
+			},
+			
+			{
+				"name": "friends_id",
+				"path": "1.1/friends/ids.json",
+				"method": "GET",
+				"args": {
+					"cursor": "-1"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "followers_id",
+				"path": "1.1/followers/ids.json",
+				"method": "GET",
+				"args": {
+					"cursor": "-1"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "me",
+				"path": "1.1/users/show.json",
+				"method": "GET",
+				"response": "json",
+				"args": {
+					"screen_name": "{screenName}"
+				}
+			},
+			
+			{
+				"name": "upload",
+				"restUri": "https://upload.twitter.com/",
+				"path": "1.1/media/upload.json",
+				"method": "POST",
+				"content-type": "multipart/form-data",
+				"args": {
+					"media": "url://{media}"
+				},
+				"response": "json"
+			},
+
+			{
+				"name": "post a tweet",
+				"path": "1.1/statuses/update.json",
+				"method": "POST",
+				"args": {
+					"status": "{status}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "post a tweet with image",
+				"path": "1.1/statuses/update.json",
+				"method": "POST",
+				"args": {
+					"status": "{status}",
+					"media_ids": "{media_id}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "update profile picture",
+				"path": "1.1/account/update_profile_image.json",
+				"method": "POST",
+				"args": {
+					"image": "url-base64://{image}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "get most recent post",
+				"path": "1.1/statuses/user_timeline.json",
+				"method": "GET",
+				"response": "json-array",
+				"args": {
+					"count": "1",
+					"include_rts": "true"
+				}
+			},
+			
+			{
+				"name": "get posts",
+				"path": "1.1/statuses/user_timeline.json",
+				"method": "GET",
+				"response": "json-array",
+				"args": {
+					"count": "50",
+					"include_rts": "true",
+					"since_id": "{sinceId}"
+				}
+			},
+			
+			{
+				"name": "get followers",
+				"path": "1.1/followers/list.json",
+				"method": "GET",
+				"response": "json",
+				"args": {
+					"cursor": "{cursor}",
+					"count": "200",
+					"skip_status": "true"	
+				}
+			}
+		]
+	}
+}

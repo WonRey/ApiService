@@ -1,0 +1,113 @@
+{
+	"name": "dropbox",
+	"url": "https://www.dropbox.com/developers/core/docs",
+	"type": "rest",
+	
+	"body": {
+		"appId": "4ynn2vvduw4j8kl",
+		"appSecret": "8d3nm656ztsonum",
+		"restUri": "https://api.dropboxapi.com/1/",
+		"redirectUri": "https://localhost/callback/dropbox",
+		"tokenExpiredCode": 401,
+		"authentication": "OAuth2",
+		
+		"functions": [
+			{
+				"name": "authorize",
+				"path": "oauth2/authorize",
+				"method": "GET",
+				"args": {
+					"client_id": "{appId}",
+					"response_type": "code",
+					"state": "{state}",
+					"redirect_uri": "{redirectUri}"
+				},
+				"authentication": "",
+				"response": "https://www.dropbox.com/1/oauth2/authorize?{args}"
+			},
+		
+			{
+				"name": "token",
+				"path": "oauth2/token",
+				"method": "POST",
+				"authentication": "Basic",
+				"args": {
+					"code": "{code}",
+					"redirect_uri": "{redirectUri}",
+					"grant_type": "authorization_code"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "info",
+				"path": "account/info",
+				"method": "GET",
+				"args": null,
+				"response": "json"
+			},
+			
+			{
+				"name": "get file",
+				"restUri": "https://content.dropboxapi.com/",
+				"path": "1/files/auto/{path}",
+				"method": "GET",
+				"args": null,
+				"response": "binary"
+			},
+			
+			{
+				"name": "add file from url",
+				"restUri": "https://content.dropboxapi.com/",
+				"path": "1/files_put/auto/{path}",
+				"method": "PUT",
+				"content-type": "application/octet-stream",
+				"args": {
+					"file": "url://{url}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "create text file",
+				"restUri": "https://content.dropboxapi.com/",
+				"path": "1/files_put/auto/{path}",
+				"method": "PUT",
+				"content-type": "application/octet-stream",
+				"args": {
+					"file": "file://{file}"
+				},
+				"response": "json"
+			},
+			
+			{
+				"name": "delta",
+				"path": "delta",
+				"method": "POST",
+				"response": "json",
+				"args": {
+					"cursor": "{cursor}"
+				}
+			},
+			
+			{
+				"name": "latest cursor",
+				"path": "delta/latest_cursor",
+				"method": "POST",
+				"response": "json"
+			},
+			
+			{
+				"name": "longpoll",
+				"restUri": "https://notify.dropboxapi.com/1/",
+				"path": "longpoll_delta",
+				"method": "GET",
+				"response": "json",
+				"authentication": null,
+				"args": {
+					"cursor": "{cursor}"
+				}
+			}
+		]
+	}
+}

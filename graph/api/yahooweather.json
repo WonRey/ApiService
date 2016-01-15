@@ -1,0 +1,24 @@
+{
+	"name": "yahooweather",
+	"url": "...",
+	"type": "rest",
+	
+	"body": {
+		"restUri": "https://query.yahooapis.com/v1/public/",
+		"authentication": null,
+		
+		"functions": [
+			{
+				"name": "weather",
+				"path": "yql",
+				"method": "GET",
+				"response": "json",
+				"args": {
+					"q": "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"{place}\")",
+					"format": "json",
+					"env": "store://datatables.org/alltableswithkeys"
+				}
+			}
+		]
+	}
+}

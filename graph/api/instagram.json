@@ -1,0 +1,69 @@
+{
+	"name": "instagram",
+	"url": "https://instagram.com/developer/",
+	"type": "rest",
+	
+	"body": {
+		"appId": "346acf863c43468592240252f4b8f292",
+		"appSecret": "6a6c7d5b835e42aeb9f5fa5df877ba48",
+		"restUri": "https://api.instagram.com/",
+		"redirectUri": "https://localhost/callback/instagram",
+		"tokenExpiredCode": "meta.error_type=OAuthAccessTokenException",
+		"authentication": "OAuth2",
+		
+		"functions": [
+			{
+				"name": "authorize",
+				"path": "oauth/authorize",
+				"method": "GET",
+				"args": {
+					"response_type": "code",
+					"client_id": "{appId}",
+					"redirect_uri": "{redirectUri}",
+					"scope": "basic",
+					"state": "{state}"
+				},
+				"authentication": "",
+				"response": "https://api.instagram.com/oauth/authorize/?{args}"
+			},
+		
+			{
+				"name": "token",
+				"path": "oauth/access_token",
+				"method": "POST",
+				"args": {
+					"client_id": "{appId}",
+					"client_secret": "{appSecret}",
+					"grant_type": "authorization_code",
+					"code": "{code}",
+					"redirect_uri": "{redirectUri}"
+				},
+				"authentication": "",
+				"response": "json"
+			},
+			
+			{
+				"name": "info",
+				"path": "v1/users/self/",
+				"method": "GET",
+				"args": {
+					"access_token": "{accessToken}"
+				},
+				"authentication": "",
+				"response": "json"
+			},
+			
+			{
+				"name": "recent media",
+				"path": "v1/users/self/media/recent/",
+				"method": "GET",
+				"args": {
+					"access_token": "{accessToken}",
+					"min_timestamp": "{lastSeenTimestamp}"
+				},
+				"authentication": "",
+				"response": "json"
+			}
+		]
+	}
+}
